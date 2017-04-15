@@ -1,0 +1,10 @@
+" User stylesheet
+sty .* body { background-color: #252a2b; color: #eeeeec; }
+sty .* a { color: #729fcf; }
+sty .* a:visited { color: #ad7fa8; }
+sty .* h1 { color: #729fcf; font-size: 130%; font-weight: bold; }
+sty .* h2 { color: #8ae234; font-size: 120%; font-weight: bold; }
+sty .* h3 { color: #fce94f; font-size: 110%; font-weight: bold; }
+sty .* h4 { color: #ad7fa8; font-size: 100%; font-weight: bold; }
+sty .* h5 { color: #e9b96e; font-size: 100%; font-weight: bold; }
+sty .* h6 { color: #fcaf3e; font-size: 100%; font-weight: bold; }

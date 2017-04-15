@@ -1,0 +1,93 @@
+filetype plugin on
+
+" specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'dag/vim-fish'
+" Make sure you use single quotes
+" Themes
+Plug 'flazz/vim-colorschemes'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+" Plug '~/my-prototype-plugin'
+
+" tpope plugins
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+"Airline plugin and themes
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdcommenter'
+" Initialize plugin system
+call plug#end()
+
+" :NERDTreeToggle
+let g:airline#extensions#tabline#enabled = 1
+
+
+" Color Scheme Part
+colorscheme molokai
+let g:molokai_original = 1
+
+" colorscheme wombat
+
+syntax enable
+" set background=light
+" colorscheme solarized
+"
+" The Rest
+set number
+set t_Co=256
+set showmatch
+set mouse=a
+
+" NERDTree plugin setting
+:map <F5> :NERDTreeToggle<CR> " toggle showing NERDTree
+"open a NERDTree automatically when vim starts up if no files were specified
+" :autocmd StdinReadPre * let s:std_in=1
+" :autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" :autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif 
+" close vim if the only window left open
+" is a NERDTree
+
+" Vim-Fish plugin Settings
+" autocmd FileType fish compiler fish
+
+" autocmd FileType fish setlocal textwidth Settingcompiler fish
+
+" autocmd FileType fish setlocal textwidth=79
+
+" autocmd FileType fish setlocal foldmethod=expr
+

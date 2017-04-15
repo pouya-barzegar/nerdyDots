@@ -1,0 +1,31 @@
+config:
+  backup: true
+  create: true
+  dotpath: /home/dinamyc/dotfiles/dotfiles
+dotfiles:
+  d_i3:
+    dst: ~/.i3
+    src: i3
+  d_pentadactyl:
+    dst: ~/.pentadactyl
+    src: pentadactyl
+  f_i3blocks_config:
+    dst: ~/.config/i3blocks/config
+    src: config/i3blocks/config
+  f_i3status_config:
+    dst: ~/.config/i3status/config
+    src: config/i3status/config
+  f_pentadactylrc:
+    dst: ~/.pentadactylrc
+    src: pentadactylrc
+  f_vimrc:
+    dst: ~/.vimrc
+    src: vimrc
+profiles:
+  parch:
+  - f_vimrc
+  - d_i3
+  - d_pentadactyl
+  - f_pentadactylrc
+  - f_i3status_config
+  - f_i3blocks_config

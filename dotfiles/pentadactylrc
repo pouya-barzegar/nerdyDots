@@ -1,0 +1,9 @@
+colorscheme solarized-light
+" colorscheme naquadah
+
+:map k 8<scroll-up-line>
+:map j 8<scroll-down-line>
+:map h 8<scroll-left-line>
+:map l 8<scroll-right-line>
+
+:set defsearch=duckduckgo

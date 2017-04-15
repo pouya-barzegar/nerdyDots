@@ -1,0 +1,2 @@
+sty http://www.gnu.org/software/guile/manual/* a { color: #729fcf !important; }
+sty http://www.gnu.org/software/guile/manual/* a { color: #ad7fa8 !important; }

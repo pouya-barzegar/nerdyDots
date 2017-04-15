@@ -1,0 +1,8 @@
+sty http://5digits.org/help/pentadactyl/* a { color: #729fcf !important; }
+sty http://5digits.org/help/pentadactyl/* a:visited { color: #ad7fa8 !important; }
+sty http://5digits.org/help/pentadactyl/* h1 { color: #729fcf !important; font-size: 130% !important; font-weight: bold !important; }
+sty http://5digits.org/help/pentadactyl/* h2 { color: #8ae234 !important; font-size: 120% !important; font-weight: bold !important; }
+sty http://5digits.org/help/pentadactyl/* h3 { color: #fce94f !important; font-size: 110% !important; font-weight: bold !important; }
+sty http://5digits.org/help/pentadactyl/* h4 { color: #ad7fa8 !important; font-size: 100% !important; font-weight: bold !important; }
+sty http://5digits.org/help/pentadactyl/* h5 { color: #e9b96e !important; font-size: 100% !important; font-weight: bold !important; }
+sty http://5digits.org/help/pentadactyl/* h6 { color: #fcaf3e !important; font-size: 100% !important; font-weight: bold !important; }
