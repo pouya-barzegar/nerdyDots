@@ -12,9 +12,18 @@ dotfiles:
   f_i3blocks_config:
     dst: ~/.config/i3blocks/config
     src: config/i3blocks/config
+  f_i3exit:
+    dst: ~/bin/i3exit
+    src: bin/i3exit
   f_i3status_config:
     dst: ~/.config/i3status/config
     src: config/i3status/config
+  f_keyboard_options.sh:
+    dst: ~/bin/keyboard_options.sh
+    src: bin/keyboard_options.sh
+  f_lancruise:
+    dst: ~/bin/lancruise
+    src: bin/lancruise
   f_pentadactylrc:
     dst: ~/.pentadactylrc
     src: pentadactylrc
@@ -29,3 +38,6 @@ profiles:
   - f_pentadactylrc
   - f_i3status_config
   - f_i3blocks_config
+  - f_lancruise
+  - f_i3exit
+  - f_keyboard_options.sh

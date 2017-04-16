@@ -1,0 +1,72 @@
+#!/bin/sh
+# /usr/bin/i3exit
+
+
+lock() {
+	fscrn=$(mktemp --tmpdir XXXX.png)
+	# requires graphicsmagick for better performance (erase <gm> to use imagemagick)
+	scrot $fscrn
+	#maim $fscrn
+	#xset dpms force off
+	#gm mogrify -colorspace gray -blur 0x3 $fscrn
+	#gm mogrify -blur 0x4 $fscrn
+	#gm mogrify -scale 50% -blur 0x2 -scale 200% $fscrn
+	mogrify -scale 10% -scale 1000% $fscrn
+	#gm mogrify -scale 10% -scale $(identify -format "%wx%h" $fscrn)\! $fscrn
+	revert() {
+		xset dpms 0 0 0
+	}
+	trap revert SIGHUP SIGINT SIGTERM
+	xset +dpms dpms 5 5 5
+	i3lock -nfi $fscrn
+	revert
+	rm $fscrn
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    switch_user)
+	dm-tool switch-to-greeter
+	;;
+    suspend)
+	if [ $(cat /proc/1/comm) = "systemd" ]; then 
+	#i3exit lock &&
+	systemctl suspend
+	else
+	#i3exit lock && 
+	dbus-send --system --dest=org.freedesktop.ConsoleKit --type=method_call --print-reply --reply-timeout=2000 /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true
+	fi
+        ;;
+    hibernate)
+	if [ $(cat /proc/1/comm) = "systemd" ]; then
+	lock && systemctl hibernate
+	else
+	i3exit lock && dbus-send --system --dest=org.freedesktop.ConsoleKit --type=method_call --print-reply --reply-timeout=2000 /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Hibernate boolean:true
+	fi
+        ;;
+    reboot)
+	if [ $(cat /proc/1/comm) = "systemd" ]; then
+        systemctl reboot
+	else
+	dbus-send --system --print-reply --type=method_call --reply-timeout=2000 --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart
+	fi
+        ;;
+    shutdown)
+	if [ $(cat /proc/1/comm) = "systemd" ]; then
+        systemctl poweroff
+        else
+	dbus-send --system --print-reply --type=method_call --reply-timeout=2000 --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+	fi
+	;;
+    *)
+        echo "== ! i3exit: missing or wrong argument ! ==
+Try again with: lock | logout | switch_user | suspend | hibernate | reboot | shutdown"
+        exit 2
+esac
+
+exit 0
