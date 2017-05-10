@@ -9,6 +9,9 @@ dotfiles:
   d_pentadactyl:
     dst: ~/.pentadactyl
     src: pentadactyl
+  d_vim:
+    dst: ~/.vim
+    src: vim
   f_i3blocks_config:
     dst: ~/.config/i3blocks/config
     src: config/i3blocks/config
@@ -41,3 +44,4 @@ profiles:
   - f_lancruise
   - f_i3exit
   - f_keyboard_options.sh
+  - d_vim

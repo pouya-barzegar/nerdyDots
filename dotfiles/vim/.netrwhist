@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/dinamyc/.config'
+let g:netrw_dirhist_2='/home/dinamyc/.config/i3'
+let g:netrw_dirhist_3='/home/dinamyc/.autoenv'
+let g:netrw_dirhist_4='/home/dinamyc/.pentadactyl'
+let g:netrw_dirhist_5='/home/dinamyc/Documents/esp8266/mongoose/fs'
+let g:netrw_dirhist_6='/home/dinamyc/Code/github/vimiv'

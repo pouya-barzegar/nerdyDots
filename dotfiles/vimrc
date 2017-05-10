@@ -1,93 +1,198 @@
-filetype plugin on
+filetype plugin indent on
 
-" specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" ----------------------------------
+"  vimPlug Plugin manager
+"  ---------------------------------
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'dag/vim-fish'
-" Make sure you use single quotes
-" Themes
-Plug 'flazz/vim-colorschemes'
-Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips' 
 Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-"Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
+Plug 'Shougo/neocomplete.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Unmanaged plugin (manually installed and updated)
-" Plug '~/my-prototype-plugin'
-
-" tpope plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-
-"Airline plugin and themes
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'scrooloose/nerdcommenter'
-" Initialize plugin system
+Plug 'tomasr/molokai'
+" Plug 'flazz/vim-colorschemes'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-" :NERDTreeToggle
-let g:airline#extensions#tabline#enabled = 1
-
-
-" Color Scheme Part
-colorscheme molokai
-let g:molokai_original = 1
-
-" colorscheme wombat
-
-syntax enable
-" set background=light
-" colorscheme solarized
-"
-" The Rest
+set cursorline
+" set foldmethod=syntax
 set number
+set showcmd                     " Show me what I'm typing
 set t_Co=256
 set showmatch
 set mouse=a
+set incsearch                   " Shows the match while typing
+set tabstop=4 
+set shiftwidth=4 
+set expandtab
+set scrolloff=8
+" set hlsearch                 " Highlight in search
+set ignorecase                  " Ignore case in search
+set ttyscroll=3                 " Speedup scrolling
+set laststatus=2                " Show status line always
+set encoding=utf-8              " Set default encoding to UTF-8
+set completeopt=menu,menuone    " Show popup menu, even if there is one entry
+set splitright                  " Vertical windows should be split to right
+set splitbelow                  " Horizontal windows should split to bottom
+set ttyfast                     " Indicate fast terminal conn for faster redraw
 
-" NERDTree plugin setting
-:map <F5> :NERDTreeToggle<CR> " toggle showing NERDTree
+" ----------------------------------
+" Mappings  
+" -----------------------------------
+
+nnoremap W :w<cr>
+nnoremap L :bnext<cr>
+nnoremap H :bprev<cr>
+cnoremap J <down>
+cnoremap K <up>
+cnoremap jjj J
+cnoremap kkk K
+map <space> <leader>
+
+" ------------------------------------
+"  vim-airline
+" -------------------------------------
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#branch#enabled = 1
+let g:airline_theme='luna'
+let g:airline_extensions = ['tabline']
+
+" Color Scheme
+syntax enable
+colorscheme molokai
+let g:molokai_original = 1
+" colorscheme wombat
+ " colorscheme solarized
+" set background=light
+
+" ++++++++++++++++++++++++++++++++++++++++++++++
+" ++++++++++++  NERDTree options +++++++++++++++
+" ++++++++++++++++++++++++++++++++++++++++++++++
+
+:map <F3> :NERDTreeToggle<CR> " toggle showing NERDTree
 "open a NERDTree automatically when vim starts up if no files were specified
-" :autocmd StdinReadPre * let s:std_in=1
-" :autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" :autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif 
+:autocmd StdinReadPre * let s:std_in=1
+:autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | " endif
+:autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif 
 " close vim if the only window left open
 " is a NERDTree
 
-" Vim-Fish plugin Settings
-" autocmd FileType fish compiler fish
+" ++++++++++++++++++++++++++++++++++++++++++++++
+" ++++++++++++  Vim-Fish options +++++++++++++++
+" ++++++++++++++++++++++++++++++++++++++++++++++
 
-" autocmd FileType fish setlocal textwidth Settingcompiler fish
+if &shell =~# 'fish$'
+    set shell=sh
+endif
 
-" autocmd FileType fish setlocal textwidth=79
+" autocmd Filetype fish setlocal compiler fish
+autocmd FileType fish setlocal textwidth=79
+autocmd FileType fish setlocal foldmethod=expr
 
-" autocmd FileType fish setlocal foldmethod=expr
+" ++++++++++++++++++++++++++++++++++++++++++++++
+" ++++++++++++  Vim-go options +++++++++++++++++
+" ++++++++++++++++++++++++++++++++++++++++++++++
+
+augroup go
+  autocmd!
+
+  " Show by default 4 spaces for a tab
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b <Plug>(go-build)
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+  autocmd FileType go nmap <leader>l <Plug>(go-linter)
+
+augroup END
+
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_auto_typ_info = 1
+
+" ++++++++++++++++++++++++++++++++++++++++++++++
+" ++++++++++++ neocomplete options +++++++++++++
+" ++++++++++++++++++++++++++++++++++++++++++++++
+"
+"Note: This option must be set in .vimrc, NOT IN .gvimrc!
+let g:acp_enableAtStartup = 0                               " Disable AutoComplPop and 
+let g:neocomplete#enable_at_startup = 1                     " Use neocomplete.
+let g:neocomplete#enable_smart_case = 1                     " Use smartcase.
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3     " Set minimum syntax keyword length.
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+" For no inserting <CR> key.
+"return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" -------------------------------------
+"  FZF
+" -------------------------------------
+
+nnoremap <c-p> :GFiles<cr>
+nnoremap E :Files<cr>
 
