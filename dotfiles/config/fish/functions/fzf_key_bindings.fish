@@ -1,0 +1,1 @@
+/home/dinamyc/.fzf/shell/key-bindings.fish

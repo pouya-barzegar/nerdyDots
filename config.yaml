@@ -3,6 +3,9 @@ config:
   create: true
   dotpath: /home/dinamyc/dotfiles/dotfiles
 dotfiles:
+  d_functions:
+    dst: ~/.config/fish/functions
+    src: config/fish/functions
   d_i3:
     dst: ~/.i3
     src: i3
@@ -12,6 +15,12 @@ dotfiles:
   d_vim:
     dst: ~/.vim
     src: vim
+  f_bashrc:
+    dst: ~/.bashrc
+    src: bashrc
+  f_config.fish:
+    dst: ~/.config/fish/config.fish
+    src: config/fish/config.fish
   f_i3blocks_config:
     dst: ~/.config/i3blocks/config
     src: config/i3blocks/config
@@ -45,3 +54,6 @@ profiles:
   - f_i3exit
   - f_keyboard_options.sh
   - d_vim
+  - f_bashrc
+  - d_functions
+  - f_config.fish
